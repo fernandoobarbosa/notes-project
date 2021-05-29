@@ -1,4 +1,4 @@
-import mongoose from '../config/'
+import mongoose from '../config/database'
 import uniqueValidator from 'mongoose-unique-validator'
 
 const UserSchema = mongoose.Schema({
