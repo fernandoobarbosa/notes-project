@@ -2,7 +2,7 @@
 import express from 'express'
 import cors from 'cors'
 import auth from '../middleware/auth'
-import { getUsers, createUser, generateToken } from '../controllers/userController'
+import { getUsers, getUser, createUser, generateToken } from '../controllers/userController'
 import { createNote } from '../controllers/noteController'
 const app = express()
 app.use(express.json())
@@ -23,6 +23,10 @@ app.get('/users', (req, res) => {
 
 app.post('/user', (req, res) => {
   createUser(req.body.login, req.body.password, res)
+})
+
+app.get('/user', auth, (req, res) => {
+  getUser(req, res)
 })
 
 // note

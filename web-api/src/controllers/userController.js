@@ -1,4 +1,4 @@
-import { getAll, create, loginValidation } from '../services/userService'
+import { getAll, get, create, loginValidation } from '../services/userService'
 
 export const generateToken = (login, password, res) => {
   loginValidation(login, password)
@@ -12,6 +12,15 @@ export const generateToken = (login, password, res) => {
 
 export const getUsers = async (req, res) => {
   getAll()
+    .then((response) => {
+      res.status(200).send(response)
+    })
+    .catch((error) => {
+      res.status(400).send(error.writeErrors[0].errmsg)
+    })
+}
+export const getUser = async (req, res) => {
+  get(req.id)
     .then((response) => {
       res.status(200).send(response)
     })

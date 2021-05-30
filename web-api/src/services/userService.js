@@ -28,6 +28,11 @@ export const getAll = async () => {
   return users
 }
 
+export const get = async (login) => {
+  const user = await User.find({ login: login })
+  return user
+}
+
 export const create = async (login, password) => {
   const hashPassword = hash(password)
   const user = await User.insertMany([
