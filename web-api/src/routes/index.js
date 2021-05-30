@@ -3,7 +3,7 @@ import express from 'express'
 import cors from 'cors'
 import auth from '../middleware/auth'
 import { getUsers, getUser, createUser, generateToken } from '../controllers/userController'
-import { createNote, getNoteById } from '../controllers/noteController'
+import { createNote, getNoteById, updateById } from '../controllers/noteController'
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -36,6 +36,11 @@ app.post('/note', auth, (req, res) => {
 
 app.get('/note/:id', auth, (req, res) => {
   getNoteById(req.id, req.params.id, res)
+})
+
+app.put('/note/:id', auth, (req, res) => {
+  updateById(req.id, req.params.id, req.body.title, req.body.content, res)
+  // getNoteById(req.id, req.params.id, res)
 })
 
 export default app

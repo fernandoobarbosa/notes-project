@@ -9,7 +9,22 @@ export default function Note () {
   const { id } = useParams()
 
   function onSubmitForm (dados) {
+    if (dados.title === '') { dados.title = title }
+    if (dados.content === '') { dados.content = content }
     console.log(dados)
+    console.log(id)
+    api
+      .put('/note/' + id, {
+        headers: { 'Access-Control-Allow-Origin': '*', Authorization: `Bearer ${localStorage.getItem('token')}` },
+        title: dados.title,
+        content: dados.content
+      })
+      .then(function (response) {
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   }
 
   function loadNote () {

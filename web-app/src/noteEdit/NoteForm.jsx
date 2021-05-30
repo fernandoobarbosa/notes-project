@@ -32,10 +32,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function NoteForm ({ onSubmit, data }) {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
+  const [title, setTitle] = useState(data.title)
+  const [content, setContent] = useState(data.content)
   const classes = useStyles()
-  console.log(data)
+
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -49,6 +49,7 @@ export default function NoteForm ({ onSubmit, data }) {
         <form
           className={classes.form} noValidate onSubmit={(event) => {
             event.preventDefault()
+            console.log(title)
             onSubmit({ title, content })
           }}
         >

@@ -10,7 +10,7 @@ import ProtectedRoute from './protectedRoute/ProtectedRoute'
 import Login from './login/Login'
 import Dashboard from './dashboard/Dashboard'
 import Register from './register/Register'
-import Note from './note/Note'
+import Note from './noteEdit/Note'
 function App () {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
@@ -62,9 +62,16 @@ function App () {
             login={login}
             component={Dashboard}
           />
-          <Route exact path='/note/:id'>
+          <ProtectedRoute
+            isAuthenticated={isAuthenticated}
+            path='/note/:id'
+            logout={logout}
+            login={login}
+            component={Note}
+          />
+          {/* <Route exact path='/note/:id'>
             <Note />
-          </Route>
+          </Route> */}
           <Route exact path='/note'>
             <Note />
           </Route>
