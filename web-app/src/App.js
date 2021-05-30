@@ -1,25 +1,70 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom'
 
-function App() {
+import ProtectedRoute from './protectedRoute/ProtectedRoute'
+import Login from './login/Login'
+import Dashboard from './dashboard/Dashboard'
+import Register from './register/Register'
+function App () {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+  const login = () => {
+    setIsAuthenticated(true)
+  }
+
+  const logout = () => {
+    localStorage.setItem('auth', false)
+    setIsAuthenticated(false)
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem('auth') === 'true') {
+      login()
+    } else {
+      logout()
+    }
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Router>
+        <Switch>
+          <Route path='/' exact>
+            {isAuthenticated ? (
+              <Redirect to='/dashboard' />
+            ) : (
+              <Login
+                isAuthenticated={isAuthenticated}
+                logout={logout}
+                login={login}
+                component={Login}
+              />
+            )}
+          </Route>
+          <Route path='/register' exact>
+            {isAuthenticated ? (
+              <Redirect to='/dashboard' />
+            ) : (
+              <Register />
+
+            )}
+          </Route>
+          <ProtectedRoute
+            isAuthenticated={isAuthenticated}
+            path='/dashboard'
+            logout={logout}
+            login={login}
+            component={Dashboard}
+          />
+        </Switch>
+      </Router>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
