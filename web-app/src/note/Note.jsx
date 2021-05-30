@@ -2,9 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import api from '../services/api'
 import NavBar from '../common/Navbar'
+import NoteForm from './NoteForm'
 export default function Note () {
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
   const { id } = useParams()
-  const [note, setNote] = useState({})
+
+  function onSubmitForm (dados) {
+    console.log(dados)
+  }
+
   function loadNote () {
     api
       .get('/note/' + id, {
@@ -12,8 +19,10 @@ export default function Note () {
       })
       .then(function (response) {
         console.log(response.data)
+        setTitle(response.data[0].title)
+        setContent(response.data[0].content)
         // setNote(response.data)
-        // console.log(note[0])
+        console.log(response)
         // setNotes(response.data[0].notes)
       })
       .catch(function (error) {
@@ -25,12 +34,14 @@ export default function Note () {
   }
 
   useEffect(() => {
-    loadNote()
+    if (id !== undefined) { loadNote() }
   }, [])
-
+  console.log(title)
+  const data = { title: title, content: content }
   return (
     <div>
       <NavBar />
+      <NoteForm onSubmit={onSubmitForm} data={data} />
     </div>
   )
 }

@@ -65,6 +65,9 @@ function App () {
           <Route exact path='/note/:id'>
             <Note />
           </Route>
+          <Route exact path='/note'>
+            <Note />
+          </Route>
           <Route path='*'>
             <NotFound />
           </Route>
