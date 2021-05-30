@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
 import Copyright from '../common/Copyright'
+import { useHistory } from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2)
@@ -43,8 +44,16 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function Notes ({ notes, showNotes }) {
+  const history = useHistory()
+
   const onViewButtonHandler = (event) => {
     console.log(event)
+    // toDoRequest(event)
+  }
+
+  const onEditButtonHandler = (event) => {
+    console.log(event)
+    history.push('/note/' + event)
     // toDoRequest(event)
   }
 
@@ -72,10 +81,10 @@ export default function Notes ({ notes, showNotes }) {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size='small' color='primary' onClick={() => onViewButtonHandler(note.id)}>
+                      <Button size='small' color='primary' onClick={() => onViewButtonHandler(note._id)}>
                         View
                       </Button>
-                      <Button size='small' color='primary'>
+                      <Button size='small' color='primary' onClick={() => onEditButtonHandler(note._id)}>
                         Edit
                       </Button>
                     </CardActions>

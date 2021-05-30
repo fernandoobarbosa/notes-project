@@ -10,6 +10,7 @@ import ProtectedRoute from './protectedRoute/ProtectedRoute'
 import Login from './login/Login'
 import Dashboard from './dashboard/Dashboard'
 import Register from './register/Register'
+import Note from './note/Note'
 function App () {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
@@ -61,10 +62,19 @@ function App () {
             login={login}
             component={Dashboard}
           />
+          <Route exact path='/note/:id'>
+            <Note />
+          </Route>
+          <Route path='*'>
+            <NotFound />
+          </Route>
         </Switch>
       </Router>
     </div>
   )
+  function NotFound () {
+    return <h2>404 Not Found</h2>
+  }
 }
 
 export default App
