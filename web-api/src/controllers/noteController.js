@@ -1,4 +1,4 @@
-import { create, update } from '../services/noteService'
+import { create, update, remove } from '../services/noteService'
 import { get } from '../services/userService'
 
 export const createNote = (id, title, content, res) => {
@@ -26,6 +26,16 @@ export const getNoteById = (id, noteId, res) => {
 
 export const updateById = (id, noteId, title, content, res) => {
   update(id, noteId, title, content)
+    .then((response) => {
+      res.status(200).send(response.data)
+    })
+    .catch((error) => {
+      res.status(400).send(error.writeErrors[0].errmsg)
+    })
+}
+
+export const removeById = (id, noteId, res) => {
+  remove(id, noteId)
     .then((response) => {
       res.status(200).send(response.data)
     })

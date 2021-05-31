@@ -18,7 +18,7 @@ export const create = async (id, title, content) => {
 }
 
 export const update = async (id, noteId, title, content) => {
-  const user = await User.update(
+  const user = await User.updateOne(
     { login: id, 'notes._id': noteId },
     {
       $set: {
@@ -28,5 +28,13 @@ export const update = async (id, noteId, title, content) => {
     }
   )
 
+  return user
+}
+
+export const remove = async (id, noteId) => {
+  console.log(id)
+  console.log(noteId)
+  const user = User.updateOne(
+    { login: id }, { $pull: { notes: { _id: noteId } } }, { safe: true, upsert: true })
   return user
 }
