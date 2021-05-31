@@ -40,7 +40,6 @@ app.get('/note/:id', auth, (req, res) => {
 
 app.put('/note/:id', auth, (req, res) => {
   updateById(req.id, req.params.id, req.body.title, req.body.content, res)
-  // getNoteById(req.id, req.params.id, res)
 })
 
 export default app

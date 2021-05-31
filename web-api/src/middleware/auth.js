@@ -19,7 +19,7 @@ export default (req, res, next) => {
     // se passou nas verificações e é valido
     // salva o id usado para criação do token para uso posterior
     req.id = decoded.id
-    console.log(req.id)
+    // console.log(req.id)
     return next()
   })
 }

@@ -15,10 +15,8 @@ export const getNoteById = (id, noteId, res) => {
   get(id)
     .then((response) => {
       const filtered = response[0].notes.filter(function (el) {
-        console.log(el._id.toString())
         return el._id.toString() === noteId
       })
-      console.log(filtered)
       res.status(200).send(filtered)
     })
     .catch((error) => {
