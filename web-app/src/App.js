@@ -11,6 +11,7 @@ import Login from './login/Login'
 import Dashboard from './dashboard/Dashboard'
 import Register from './register/Register'
 import Note from './noteEdit/Note'
+import NewNote from './newNote/NewNote'
 function App () {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
@@ -20,6 +21,7 @@ function App () {
 
   const logout = () => {
     localStorage.setItem('auth', false)
+    localStorage.setItem('token', '')
     setIsAuthenticated(false)
   }
 
@@ -57,6 +59,13 @@ function App () {
           </Route>
           <ProtectedRoute
             isAuthenticated={isAuthenticated}
+            exact path='/note'
+            logout={logout}
+            login={login}
+            component={NewNote}
+          />
+          <ProtectedRoute
+            isAuthenticated={isAuthenticated}
             path='/dashboard'
             logout={logout}
             login={login}
@@ -69,12 +78,7 @@ function App () {
             login={login}
             component={Note}
           />
-          {/* <Route exact path='/note/:id'>
-            <Note />
-          </Route> */}
-          <Route exact path='/note'>
-            <Note />
-          </Route>
+
           <Route path='*'>
             <NotFound />
           </Route>

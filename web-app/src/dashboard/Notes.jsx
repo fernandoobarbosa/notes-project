@@ -81,11 +81,8 @@ export default function Notes ({ notes, showNotes }) {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size='small' color='primary' onClick={() => onViewButtonHandler(note._id)}>
-                        View
-                      </Button>
                       <Button size='small' color='primary' onClick={() => onEditButtonHandler(note._id)}>
-                        Edit
+                        Details
                       </Button>
                     </CardActions>
                   </Card>

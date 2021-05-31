@@ -10,7 +10,8 @@ import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
-import NoteIcon from '@material-ui/icons/Note'
+import NoteAddIcon from '@material-ui/icons/NoteAdd'
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(4),
@@ -31,9 +32,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function NoteForm ({ onSubmit, data }) {
-  const [title, setTitle] = useState(data.title)
-  const [content, setContent] = useState(data.content)
+export default function NoteForm ({ onSubmit }) {
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
   const classes = useStyles()
 
   return (
@@ -41,10 +42,10 @@ export default function NoteForm ({ onSubmit, data }) {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <NoteIcon />
+          <NoteAddIcon />
         </Avatar>
         <Typography component='h1' variant='h5'>
-          Edit Note
+          New Note
         </Typography>
         <form
           className={classes.form} noValidate onSubmit={(event) => {
@@ -62,7 +63,7 @@ export default function NoteForm ({ onSubmit, data }) {
                 multiline
                 name='title'
                 onChange={(event) => { setTitle(event.target.value) }}
-                defaultValue={data.title}
+
               />
             </Grid>
             <Grid item xs={12}>
@@ -74,7 +75,7 @@ export default function NoteForm ({ onSubmit, data }) {
                 multiline
                 rows={14}
                 onChange={(event) => { setContent(event.target.value) }}
-                defaultValue={data.content}
+
               />
             </Grid>
           </Grid>

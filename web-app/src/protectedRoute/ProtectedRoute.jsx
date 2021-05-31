@@ -12,6 +12,7 @@ function ProtectedRoute ({
     <Route
       {...rest}
       render={(props) => {
+        console.log(isAuthenticated)
         if (isAuthenticated) {
           return <Component logout={logout} login={login} />
         } else {
