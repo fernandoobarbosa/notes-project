@@ -43,13 +43,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function Notes ({ notes, showNotes }) {
+export default function Notes ({ notes, showNotes, deleteNote }) {
   const history = useHistory()
 
   const onEditButtonHandler = (event) => {
-    console.log(event)
     history.push('/note/' + event)
-    // toDoRequest(event)
+  }
+
+  const onDeleteButtonHandler = (event) => {
+    deleteNote(event)
   }
 
   const classes = useStyles()
@@ -75,6 +77,9 @@ export default function Notes ({ notes, showNotes }) {
                     <CardActions>
                       <Button size='small' color='primary' onClick={() => onEditButtonHandler(note._id)}>
                         Details
+                      </Button>
+                      <Button size='small' color='secondary' onClick={() => onDeleteButtonHandler(note._id)}>
+                        Delete
                       </Button>
                     </CardActions>
                   </Card>
