@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import NewNoteForm from '../newNote/NewNoteForm'
 import NavBar from '../common/Navbar'
 import api from '../services/api'
